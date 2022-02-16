@@ -3,9 +3,9 @@ from posixpath import split
 
 def time_calculator(current_time, added_time, day = None):
     period = None 
-    meridian = ('AM' , 'PM')
+    meridian = ('PM' , 'AM')
     later = ''
-
+    new_day = ''
     # splitting current time
     ct = current_time.split()
     period = ct[1]
@@ -36,17 +36,18 @@ def time_calculator(current_time, added_time, day = None):
     if minutes < 10:
         minutes = f"0{minutes}"
 
-    if day:
+    if day != None:
         week = ("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
-        new_day = f',{week[(week.index(day.capitalize()) + passed) % 7]}'
+        new_day = f', {week[(week.index(day.capitalize()) + passed) % 7]}'
 
     if passed == 1:
-        later = 'Next Day'
+        later = ' (next day)'
     elif passed != 0:
-        later = f'({passed} Days Later)'
-    
-    return f'{hour}:{minutes} {meridian[period]} {new_day} {later}'
+        later = f' ({passed} days later)'
 
+    return f'{hour}:{minutes} {meridian[period]}{new_day}{later}'
+
+   
 
 
     
@@ -55,7 +56,7 @@ def time_calculator(current_time, added_time, day = None):
 
     
 
-# print(time_calculator("11:30 PM", "122:32", "Monday"))
+#print(time_calculator("11:30 PM", "122:32", "Monday"))
 
 """ 
 current_timez = '3:40 AM'
